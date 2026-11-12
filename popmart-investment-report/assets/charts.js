@@ -155,19 +155,19 @@
 
   // --- Chart 6: 2026Q3 区域收益同比 ---
   var chartQ3 = echarts.init(document.getElementById('chart-q3'), null, { renderer: 'svg' });
-  var q3Cats = ['整体', '中国内地', '亚太', '欧洲及其他', '美洲'];
-  var q3Mid = [-47.5, -27.5, -67.5, -52.5, -72.5];
-  var q3Range = ['下降45%–50%', '下降25%–30%', '下降65%–70%', '下降50%–55%', '下降70%–75%'];
+  var q3Cats = ['整体', '中国内地', '内地线下渠道', '内地线上渠道', '亚太', '欧洲及其他', '美洲'];
+  var q3Mid = [-47.5, -27.5, -7.5, -47.5, -67.5, -52.5, -72.5];
+  var q3Range = ['下降45%–50%', '下降25%–30%', '下降5%–10%', '下降45%–50%', '下降65%–70%', '下降50%–55%', '下降70%–75%'];
   chartQ3.setOption({
     animation: false,
-    tooltip: tooltip({ trigger: 'item', formatter: function (p) { return p.name + '<br/>公告区间：' + q3Range[p.dataIndex]; } }),
+    tooltip: tooltip({ trigger: 'item', formatter: function (p) { return p.name + '<br/>公告区间：' + q3Range[q3Cats.length - 1 - p.dataIndex]; } }),
     grid: { left: 70, right: 90, top: 20, bottom: 30 },
     xAxis: Object.assign(baseAxis(), { type: 'value', min: -85, max: 0, name: '%', nameTextStyle: { color: muted, fontSize: 11 }, splitLine: { show: true, lineStyle: { color: rule, type: 'dashed' } } }),
     yAxis: Object.assign(baseAxis(), { type: 'category', data: q3Cats.slice().reverse(), axisLabel: { color: ink, fontSize: 12 } }),
     series: [{
       type: 'bar',
       barWidth: '55%',
-      data: q3Mid.slice().reverse().map(function (v) { return { value: v, itemStyle: { color: accent2, borderRadius: v === -47.5 ? [4, 0, 0, 4] : 0 } }; }),
+      data: q3Mid.slice().reverse().map(function (v) { return { value: v, itemStyle: { color: accent2, borderRadius: [4, 0, 0, 4] } }; }),
       label: { show: true, position: 'left', color: accent2, fontSize: 11, fontFamily: 'IBMPlexMono', formatter: function (p) { return p.value + '%'; } }
     }]
   });
